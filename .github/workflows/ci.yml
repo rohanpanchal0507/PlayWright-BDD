@@ -29,8 +29,37 @@ jobs:
           BROWSER=${{ matrix.browser }} HEADLESS=${{ matrix.headless }} npm run bdd:test
         env:
           CI: true
+          API_BASE: ${{ secrets.API_BASE }}
+          ADMIN_USER: ${{ secrets.ADMIN_USER }}
+          ADMIN_PASS: ${{ secrets.ADMIN_PASS }}
       - name: Upload reports
         uses: actions/upload-artifact@v4
         with:
           name: report-${{ matrix.browser }}
           path: reports
+
+  merge-reports:
+    runs-on: ubuntu-latest
+    needs: e2e-matrix
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+      - name: Merge reports
+        run: |
+          mkdir -p reports
+          find artifacts -name "*.json" -exec cp {} reports/ \;
+          npm ci
+          node scripts/merge-reports.js
+      - name: Generate HTML report
+        run: npm run report:generate
+      - name: Upload merged report
+        uses: actions/upload-artifact@v4
+        with:
+          name: merged-html-report
+          path: reports/html
