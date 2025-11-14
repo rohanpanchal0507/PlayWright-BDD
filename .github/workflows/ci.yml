@@ -1,0 +1,36 @@
+
+name: E2E Matrix
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  e2e-matrix:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        browser: [ chromium, firefox, webkit ]
+        node: [ 18 ]
+        headless: [ true ]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+      - name: Install deps
+        run: npm ci
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps
+      - name: Run BDD tests
+        run: |
+          BROWSER=${{ matrix.browser }} HEADLESS=${{ matrix.headless }} npm run bdd:test
+        env:
+          CI: true
+      - name: Upload reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: report-${{ matrix.browser }}
+          path: reports

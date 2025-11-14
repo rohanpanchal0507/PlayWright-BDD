@@ -1,0 +1,29 @@
+{
+  "name": "playwright-bdd",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "bdd:test": "cucumber-js --require ./features/support/world.js --require ./features/support/hooks.js --require ./features/step-definitions --format json:reports/cucumber.json --format rerun:reports/rerun.txt features",
+    "bdd:parallel": "cucumber-js --parallel 4 --require ./features/support/world.js --require ./features/support/hooks.js --require ./features/step-definitions --format json:reports/cucumber.json --format rerun:reports/rerun.txt features",
+    "bdd:rerun": "node ./scripts/rerun-failed.js",
+    "report:generate": "node ./scripts/generate-report.js",
+    "test": "npm run bdd:test && npm run bdd:rerun && npm run report:generate"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@cucumber/cucumber": "^12.2.0",
+    "@cucumber/pretty-formatter": "^2.4.1",
+    "axios": "^1.13.2",
+    "faker": "^6.6.6",
+    "multiple-cucumber-html-reporter": "^3.9.3",
+    "playwright": "^1.56.1",
+    "playwright-test": "^14.1.12"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.3"
+  }
+}

@@ -1,0 +1,105 @@
+[
+  {
+    "description": "",
+    "elements": [
+      {
+        "description": "",
+        "id": "login-to-demo-application;successful-login-with-valid-credentials",
+        "keyword": "Scenario",
+        "line": 8,
+        "name": "Successful login with valid credentials",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 217366200
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 5,
+            "name": "I open the login page",
+            "match": {
+              "location": "features\\step-definitions\\login.steps.js:7"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 5502132000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 9,
+            "name": "I login with username \"Admin\" and password \"admin123\"",
+            "match": {
+              "location": "features\\step-definitions\\login.steps.js:13"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3873803500
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 10,
+            "name": "I should see the dashboard page",
+            "match": {
+              "location": "features\\step-definitions\\login.steps.js:18"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 26817300
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 192039200
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@login",
+            "line": 1
+          },
+          {
+            "name": "@smoke",
+            "line": 1
+          },
+          {
+            "name": "@positive",
+            "line": 7
+          },
+          {
+            "name": "@valid",
+            "line": 7
+          }
+        ],
+        "type": "scenario"
+      }
+    ],
+    "id": "login-to-demo-application",
+    "line": 2,
+    "keyword": "Feature",
+    "name": "Login to demo application",
+    "tags": [
+      {
+        "name": "@login",
+        "line": 1
+      },
+      {
+        "name": "@smoke",
+        "line": 1
+      }
+    ],
+    "uri": "features\\login.feature"
+  }
+]
